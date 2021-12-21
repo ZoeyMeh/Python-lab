@@ -1,0 +1,24 @@
+ #Extract API Data
+ #Extract Data Using an API
+
+!pip install pandas
+!pip install requests
+import requests
+import pandas as pd
+
+url = "http://api.exchangeratesapi.io/v1/latest?base=EUR&access_key=dc9fb1a3ac7f3bfdb2f46a2e8f3eed28"  #Make sure to change ******* to your API key.
+r = requests.get(url)
+r =r.json()
+
+#Save as DataFrame
+dataframe = pd.DataFrame(r)
+
+# Drop unnescessary columns
+dataframe.drop(columns=["success", "timestamp", "base", "date"], inplace=True)
+
+# Save the Dataframe
+
+exchange_rates_1 = dataframe.to_csv(r"D:/ZOEY/exchange_rates_1.csv")
+
+
+ 
